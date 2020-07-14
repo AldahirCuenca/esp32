@@ -49,4 +49,24 @@ class Sensores
 
     return json_encode($response);
   }
+
+  /*public function eliminarSensor()
+  {
+    $req = json_decode($request->getbody());
+
+    //$sql = "INSERT INTO ejemplo(sensor,valor) VALUES(:sensor,:valor)";
+      $sql = "DELETE FROM ejemplo where id=:id":
+    $response=new stdClass();
+      try {
+        $statement = $this->con->prepare($sql);
+        $statement->bindparam("id", $req->id); 
+        $statement->execute();
+        $response=$req;
+      } catch (Exception $e) {
+        $response->mensaje = $e->getMessage();
+      }
+
+    return json_encode($response);
+
+  }*/
 }
