@@ -55,7 +55,7 @@ class Sensores
     $req = json_decode($request->getbody());
 
     //$sql = "INSERT INTO ejemplo(sensor,valor) VALUES(:sensor,:valor)";
-      $sql = "DELETE * FROM ejemplo where id=:id":
+      $sql = "DELETE  FROM ejemplo where id=:id";
     $response=new stdClass();
       try {
         $statement = $this->con->prepare($sql);
@@ -69,4 +69,29 @@ class Sensores
     return json_encode($response);
 
   }
+
+ public function modificarSensor($request)
+  {
+    $req = json_decode($request->getbody());
+
+    //$sql = "INSERT INTO ejemplo(sensor,valor) VALUES(:sensor,:valor)";
+     // $sql = "DELETE  FROM ejemplo where id=:id";
+     $sql = "UPDATE ejemplo  SET sensor=:sensor, valor=:valor WHERE id=:id";
+    $response=new stdClass();
+      try {
+        $statement = $this->con->prepare($sql);
+        $statement->bindparam("id", $req->id);
+        $statement->bindparam("sensor", $req->sensor);
+        $statement->bindparam("valor", $req->valor); 
+         
+        $statement->execute();
+        $response=$req;
+      } catch (Exception $e) {
+        $response->mensaje = $e->getMessage();
+      }
+
+    return json_encode($response);
+
+  }
+  
 }
